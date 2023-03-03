@@ -2,51 +2,48 @@ package Chapter3;
 
 public class Clock {
     private int hour;
-    private int minute;
+    private int minutes;
     private int second;
-    //private final String clockFormat;
 
-
-    public Clock(int hour, int minute, int second){
-        if (hour >= 0) this.hour = hour;
-        if (minute >= 0) this.minute = minute;
-        if (second >= 0) this.second = second;
-       // clockFormat = " ";
+    public Clock(int hour, int minutes, int second) {
+        if(hour > 23) hour = 0;
+        this.hour = hour;
+        if(minutes > 59) minutes = 0;
+        this.minutes = minutes;
+        if(second > 59) second = 0;
+        this.second = second;
     }
 
-    public void setHour(int hour){
-        if (hour > 23) this.hour = 0;
+    public int getHour() {
+        return hour;
     }
 
-    public int getHour(){
-        return this.hour;
+    public void setHour(int hour) {
+        if(hour > 23) hour = 0;
+        this.hour = hour;
     }
 
-    public void setMinute(int minute){
-        if (minute > 59) this.minute = 0;
+    public int getMinutes() {
+        return minutes;
     }
 
-    public int getMinute(){
-        return this.minute;
+    public void setMinutes(int minutes) {
+        if(minutes > 59) minutes = 0;
+        this.minutes = minutes;
     }
 
-    public void setSecond(int second){
-        if (second > 59) this.second = 0;
+    public int getSecond() {
+        return second;
     }
 
-    public int getSecond(){
-        return this.second;
+    public void setSecond(int second) {
+        if(second > 59) second = 0;
+        this.second = second;
     }
 
     public String displayTime(){
-       System.out.printf("%d:%d:%d", this.hour, this.minute, this.second);
-        return null;
+        return String.format("The time is %s:%s:%s", getHour(), getMinutes(), getSecond());
     }
-
-//    public String displayTime(){
-//        return setDisplayTime();
-//    }
-
 }
 
 

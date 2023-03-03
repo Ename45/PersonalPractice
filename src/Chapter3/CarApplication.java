@@ -5,7 +5,7 @@ public class CarApplication {
         Car car = new Car("RAV4 Toyota", "2014", 5_000_000);
         Car carTwo = new Car("Mercedes Benz", "2019", 15_000_000);
 
-        System.out.printf("This is a %s, ", car.getModel());
+        /*System.out.printf("This is a %s, ", car.getModel());***/
         System.out.printf("%s model%n", car.getYear());
         System.out.printf("The car costs N%.0f%n", car.getPrice());
         car.setDiscount(5);
