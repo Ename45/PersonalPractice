@@ -35,18 +35,15 @@ public class Bank {
 
     public void deposit(int amount, int accountNumber) {
         Account foundAccount = findAccountByAccountNumber(accountNumber);
-        if (amount <= 0){
-            throw  new IllegalArgumentException("Invalid deposit amount");
-        }
-        else foundAccount.deposit(amount);
+        foundAccount.deposit(amount);
     }
 
-    private Account findAccountByAccountNumber(int accountNumber) {
+    public Account findAccountByAccountNumber(int accountNumber) {
         for (Account account: accounts) {
             boolean accountNumberMatches = account.getAccountNumber() == accountNumber;
             if (accountNumberMatches) return  account;
         }
-        return  null;
+        throw new IllegalArgumentException("Account number not found");
     }
 
     public void transfer(int amount, int senderAccountNumber, int receiverAccountNumber, String senderPin) {
@@ -58,17 +55,8 @@ public class Bank {
 
     public void withdraw(int amount, int accountNumber, String pin) {
         Account foundAccount = findAccountByAccountNumber(accountNumber);
-        if (amount <= 0){throw  new IllegalArgumentException("Invalid withdrawal amount");}
-        if (amount > foundAccount.checkBalance("1234")){
-            throw  new IllegalArgumentException("Insufficient funds");
-        }
-        else foundAccount.withdraw(amount, pin);
+        foundAccount.withdraw(amount, pin);
     }
-
-//    public void withdraw(int amount, int accountNumber, String pin) {
-//        Account foundAccount = findAccountByAccountNumber(accountNumber);
-//
-//    }
 
 
 }

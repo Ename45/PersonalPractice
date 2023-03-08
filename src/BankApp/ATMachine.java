@@ -5,12 +5,12 @@ import java.util.Scanner;
 
 public class ATMachine {
     private static Bank gtBank = new Bank("Gtbank");
+
     public static void main(String[] args) {
         displayMainMenu();
-
     }
 
-    private static void displayMainMenu(){
+    private static void displayMainMenu() {
         String mainMenu = """
                 Welcome to GTB bank
                 1 --> Create Account
@@ -19,9 +19,8 @@ public class ATMachine {
                 4 --> Transfer
                 5 --> Check Balance
                 """;
-        System.out.println(mainMenu);
         String userInput = input(mainMenu);
-        switch (userInput.charAt(0)){
+        switch (userInput.charAt(0)) {
             case '1': {
                 createAccount();
                 break;
@@ -40,9 +39,10 @@ public class ATMachine {
                 checkBalance();
                 break;
             }
-            default:
+            default:{
                 errorMessage();
                 displayMainMenu();
+            }
         }
     }
 
@@ -80,10 +80,15 @@ public class ATMachine {
     }
 
     private static void checkBalance() {
-        int accountNumber = Integer.parseInt(input("What is our account number"));
+        int accountNumber = Integer.parseInt(input("What is our account number?"));
         String pin = input("Oya type ya pin");
-        int balance = gtBank.checkBalanceFor(accountNumber, pin);
-        display("Your balance is "+balance);
+        try{
+            int balance = gtBank.checkBalanceFor(accountNumber, pin);
+            display("Your balance is "+balance);
+        }catch(IllegalArgumentException ex){
+            display(ex.getMessage());
+            displayMainMenu();
+        }
         displayMainMenu();
     }
 
@@ -91,13 +96,18 @@ public class ATMachine {
         int accountNumber = Integer.parseInt(input("What is your account number"));
         int amount = Integer.parseInt(input("How much do you want to deposit"));
 
-        gtBank.deposit(amount, accountNumber);
-        display("Deposited successfully");
-        displayMainMenu();
+        try{
+            gtBank.deposit(amount, accountNumber);
+        }
+        catch(IllegalArgumentException ex){
+            display(ex.getMessage());
+            displayMainMenu();
+        }
+            display("Deposited successfully");
+            displayMainMenu();
     }
 
     private static void createAccount() {
-//        Scanner scanner = new Scanner(System.in);
         String accountName = input("What is your account name"); // create account name
         String accountPin = input("What is your account pin");// create account pin
 

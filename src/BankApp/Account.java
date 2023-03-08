@@ -3,8 +3,6 @@ package BankApp;
 public class Account {
     private int balance;
     private String pin;
-
-
     private int accountNumber;
     private String accountName;
 
@@ -16,10 +14,12 @@ public class Account {
     }
 
     public void deposit(int amount) {
-        if (amount <= 0) {
+        if (amount > 0) {
+            balance += amount;
+        }
+        else {
             throw  new IllegalArgumentException("Deposit amount must be greater than zero");
         }
-        else balance += amount;
     }
 
 
@@ -33,15 +33,20 @@ public class Account {
     }
 
     public void withdraw(int amount, String pin) {
-        if (amount <= 0){throw  new IllegalArgumentException("Invalid withdraw amount");}
-        if (amount > balance){
-            throw  new IllegalArgumentException("Insufficient funds");
+        if (amount <= 0){
+            throw  new IllegalArgumentException("Cannot withdraw an amount that is zero or less ");
         }
-        else if (pinIsCorrect(pin)) balance -= amount;
+        if (amount <= balance){
+            if (pinIsCorrect(pin)) balance -= amount;
+        }
+        else throw  new IllegalArgumentException("Insufficient funds. Broke a**");
     }
 
     public int getAccountNumber() {
         return accountNumber;
     }
 
+    public int getBalance() {
+        return balance;
+    }
 }

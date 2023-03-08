@@ -67,6 +67,12 @@ class BankTest {
         assertThrows(IllegalArgumentException.class, ()-> gtBank.withdraw(invalidWithdrawalRequestFromBank, 1, "1234"));
     }
 
+    @Test
+    public void findByAccountNumber_throwsException_ifAccountNumberIsWrongTest(){
+        assertThrows(IllegalArgumentException.class, ()-> gtBank.findAccountByAccountNumber(2));
+
+    }
+
 
 
 
